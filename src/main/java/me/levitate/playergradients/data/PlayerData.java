@@ -46,14 +46,16 @@ public class PlayerData {
 
     public void loadEquippedGradients() {
         ConfigurationSection section = dataConfig.getConfigurationSection("equippedGradients");
-        if (section != null) {
-            for (String key : section.getKeys(false)) {
-                UUID playerUUID = UUID.fromString(key);
-                String gradientName = section.getString(key);
-                Gradient gradient = gradientManager.getGradientByName(gradientName);
-                if (gradient != null) {
-                    gradientManager.equipGradient(playerUUID, gradient);
-                }
+        if (section == null)
+            return;
+
+        for (String key : section.getKeys(false)) {
+            UUID playerUUID = UUID.fromString(key);
+            String gradientName = section.getString(key);
+
+            Gradient gradient = gradientManager.getGradientByName(gradientName);
+            if (gradient != null) {
+                gradientManager.equipGradient(playerUUID, gradient);
             }
         }
     }
