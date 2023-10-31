@@ -1,5 +1,5 @@
 name: PlayerGradients
-version: '1.0.3'
+version: '1.0.4'
 main: me.levitate.playergradients.PlayerGradients
 api-version: '1.19'
 depend:
