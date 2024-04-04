@@ -75,13 +75,33 @@ public class GradientManager {
      * @param gradientName The name of the gradient to equip.
      */
     public void equipGradient(Player player, String gradientName) {
-        UUID playerUUID = player.getUniqueId();
+        final UUID playerUUID = player.getUniqueId();
 
-        Gradient gradient = getGradientByName(gradientName);
+        final Gradient gradient = getGradientByName(gradientName);
         if (gradient == null) {
             config.sendMessage(player, "nonexistent");
             return;
         }
+
+        if (!player.hasPermission(gradient.getPermission())) {
+            config.sendMessage(player, "no-permission");
+            return;
+        }
+
+        this.equipGradient(playerUUID, gradient);
+
+        String placeholder = gradient.getPlaceholder().replaceAll("%name%", player.getName());
+        player.sendMessage(MiniMessage.miniMessage().deserialize(config.getMessages().get("equipped").replaceAll("%placeholder%", placeholder)));
+    }
+
+    /**
+     * Equips a gradient for a player using the gradient.
+     *
+     * @param player       The player to equip the gradient for.
+     * @param gradient     The name of the gradient to equip.
+     */
+    public void equipGradient(Player player, Gradient gradient) {
+        final UUID playerUUID = player.getUniqueId();
 
         if (!player.hasPermission(gradient.getPermission())) {
             config.sendMessage(player, "no-permission");

@@ -47,7 +47,7 @@ public class GradientCommand {
 
     @Execute(name = "create")
     @Permission("pg.create")
-    public void onCreate(@Context CommandSender sender, @Arg String name, @Arg String placeholder) {
+    public void onCreate(@Context CommandSender sender, @Arg("name") String name, @Arg String placeholder) {
         if (!placeholder.contains("%name%")) {
             if (sender instanceof Player player)
                 config.sendMessage(player, "no-name");
@@ -68,31 +68,17 @@ public class GradientCommand {
 
     @Execute(name = "delete", aliases = {"remove"})
     @Permission("pg.delete")
-    public void onDelete(@Context CommandSender sender, @Arg String name) {
-        final Gradient gradient = gradientManager.getGradientByName(name);
-        if (gradient == null) {
-            if (sender instanceof Player player)
-                config.sendMessage(player, "nonexistent");
-
-            return;
-        }
-
+    public void onDelete(@Context CommandSender sender, @Arg Gradient gradient) {
         gradientManager.deleteGradient(gradient);
     }
 
     @Execute(name = "equip")
-    public void onEquip(@Context CommandSender sender, @Arg String name) {
-        if (!(sender instanceof Player player))
-            return;
-
-        gradientManager.equipGradient(player, name);
+    public void onEquip(@Context Player player, @Arg Gradient gradient) {
+        gradientManager.equipGradient(player, gradient);
     }
 
     @Execute(name = "unequip")
-    public void onUnequip(@Context CommandSender sender) {
-        if (!(sender instanceof Player player))
-            return;
-
+    public void onUnequip(@Context Player player) {
         final UUID playerUUID = player.getUniqueId();
 
         final Gradient gradient = gradientManager.getGradient(playerUUID);

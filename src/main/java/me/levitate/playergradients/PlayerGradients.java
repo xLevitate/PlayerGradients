@@ -8,8 +8,10 @@ import me.levitate.playergradients.command.GradientCommand;
 import me.levitate.playergradients.command.MainCommand;
 import me.levitate.playergradients.config.Configuration;
 import me.levitate.playergradients.data.DataWrapper;
+import me.levitate.playergradients.gradients.Gradient;
 import me.levitate.playergradients.gradients.GradientManager;
 import me.levitate.playergradients.papi.Placeholder;
+import me.levitate.playergradients.resolver.GradientResolver;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -40,6 +42,7 @@ public final class PlayerGradients extends JavaPlugin {
 
         this.liteCommands = LiteCommandsBukkit.builder("PlayerGradients", this)
                 .commands(new GradientCommand(gradientManager, config, dataWrapper))
+                .argument(Gradient.class, new GradientResolver(gradientManager))
                 .build();
     }
 
