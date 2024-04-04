@@ -19,6 +19,7 @@ public class GradientData {
 
     public GradientData(JavaPlugin plugin, GradientManager gradientManager) {
         this.gradientManager = gradientManager;
+
         dataFile = new File(plugin.getDataFolder(), "gradients.yml");
         dataConfig = YamlConfiguration.loadConfiguration(dataFile);
 

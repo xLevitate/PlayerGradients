@@ -1,7 +1,10 @@
 package me.levitate.playergradients;
 
 import co.aikar.commands.PaperCommandManager;
+import dev.rollczi.litecommands.LiteCommands;
+import dev.rollczi.litecommands.bukkit.LiteCommandsBukkit;
 import fr.mrmicky.fastinv.FastInvManager;
+import me.levitate.playergradients.command.GradientCommand;
 import me.levitate.playergradients.command.MainCommand;
 import me.levitate.playergradients.config.Configuration;
 import me.levitate.playergradients.data.DataWrapper;
@@ -12,12 +15,12 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class PlayerGradients extends JavaPlugin {
     private DataWrapper dataWrapper;
+    private Placeholder placeholder;
+
+    private LiteCommands liteCommands;
 
     @Override
     public void onEnable() {
-        getConfig().options().copyDefaults(true);
-        saveConfig();
-
         final Configuration config = new Configuration(this, getConfig());
         final GradientManager gradientManager = new GradientManager(config);
 
@@ -25,18 +28,24 @@ public final class PlayerGradients extends JavaPlugin {
         dataWrapper.loadAllData();
 
         if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
-            new Placeholder(gradientManager).register();
+            placeholder = new Placeholder(gradientManager);
+            placeholder.register();
         }
 
         FastInvManager.register(this);
 
-        final PaperCommandManager commandManager = new PaperCommandManager(this);
-        commandManager.getCommandCompletions().registerCompletion("gradientnames", c -> gradientManager.getGradientNames());
-        commandManager.registerCommand(new MainCommand(gradientManager, config, dataWrapper));
+        //final PaperCommandManager commandManager = new PaperCommandManager(this);
+        //commandManager.getCommandCompletions().registerCompletion("gradientnames", c -> gradientManager.getGradientNames());
+        //commandManager.registerCommand(new MainCommand(gradientManager, config, dataWrapper));
+
+        this.liteCommands = LiteCommandsBukkit.builder("PlayerGradients", this)
+                .commands(new GradientCommand(gradientManager, config, dataWrapper))
+                .build();
     }
 
     @Override
     public void onDisable() {
         dataWrapper.saveAllData();
+        placeholder.unregister();
     }
 }

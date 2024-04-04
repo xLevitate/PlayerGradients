@@ -8,17 +8,10 @@ import me.levitate.playergradients.gradients.Gradient;
 import me.levitate.playergradients.gradients.GradientManager;
 import me.levitate.playergradients.utils.Utils;
 
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.TextDecoration;
-import net.kyori.adventure.text.minimessage.MiniMessage;
-
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-
-import java.util.List;
 
 public class GradientSelector extends FastInv {
     private final Configuration config;

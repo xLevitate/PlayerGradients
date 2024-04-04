@@ -1,9 +1,7 @@
 package me.levitate.playergradients.command;
 
 import co.aikar.commands.BaseCommand;
-import co.aikar.commands.CommandHelp;
 import co.aikar.commands.annotation.*;
-import lombok.AllArgsConstructor;
 import me.levitate.playergradients.config.Configuration;
 import me.levitate.playergradients.data.DataWrapper;
 import me.levitate.playergradients.gradients.Gradient;
