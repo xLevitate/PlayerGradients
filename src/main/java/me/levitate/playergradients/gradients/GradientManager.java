@@ -91,7 +91,7 @@ public class GradientManager {
         this.equipGradient(playerUUID, gradient);
 
         String placeholder = gradient.getPlaceholder().replaceAll("%name%", player.getName());
-        player.sendMessage(MiniMessage.miniMessage().deserialize(config.getMessages().get("equipped").replaceAll("%placeholder%", placeholder)));
+        player.sendMessage(MiniMessage.miniMessage().deserialize(config.getMessages().get("equip-change").replaceAll("%placeholder%", placeholder)));
     }
 
     /**
@@ -110,17 +110,28 @@ public class GradientManager {
 
         this.equipGradient(playerUUID, gradient);
 
-        String placeholder = gradient.getPlaceholder().replaceAll("%name%", player.getName());
-        player.sendMessage(MiniMessage.miniMessage().deserialize(config.getMessages().get("equipped").replaceAll("%placeholder%", placeholder)));
+        final String placeholder = gradient.getPlaceholder().replaceAll("%name%", player.getName());
+        player.sendMessage(MiniMessage.miniMessage().deserialize(config.getMessages().get("equip-change").replaceAll("%placeholder%", placeholder)));
     }
 
     /**
-     * Unequips a gradient from a player.
+     * Unequips a gradient from a player uuid.
      *
      * @param playerUUID The UUID of the player.
      */
     public void unequipGradient(UUID playerUUID) {
         equippedGradient.remove(playerUUID);
+    }
+
+    /**
+     * Unequips a gradient from a player
+     *
+     * @param player The player to unequip a gradient for.
+     */
+    public void unequipGradient(Player player) {
+        equippedGradient.remove(player.getUniqueId());
+
+        player.sendMessage(MiniMessage.miniMessage().deserialize(config.getMessages().get("equip-change").replaceAll("%placeholder%", player.getName())));
     }
 
     /**

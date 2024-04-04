@@ -15,8 +15,6 @@ import me.levitate.playergradients.inventory.GradientSelector;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.UUID;
-
 @Command(name = "playergradients", aliases = {"gradient", "gradients", "playergradient", "pg"})
 @Permission("pg.use")
 public class GradientCommand {
@@ -79,15 +77,12 @@ public class GradientCommand {
 
     @Execute(name = "unequip")
     public void onUnequip(@Context Player player) {
-        final UUID playerUUID = player.getUniqueId();
-
-        final Gradient gradient = gradientManager.getGradient(playerUUID);
+        final Gradient gradient = gradientManager.getGradient(player.getUniqueId());
         if (gradient == null) {
             config.sendMessage(player, "not-equipped");
             return;
         }
 
-        gradientManager.unequipGradient(playerUUID);
+        gradientManager.unequipGradient(player);
     }
-
 }
