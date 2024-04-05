@@ -12,6 +12,7 @@ import me.levitate.playergradients.gradients.Gradient;
 import me.levitate.playergradients.gradients.GradientManager;
 import me.levitate.playergradients.inventory.GradientSelector;
 
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -62,11 +63,17 @@ public class GradientCommand {
 
         final Gradient gradient = gradientManager.createGradient(name, placeholder);
         dataWrapper.addGradient(gradient);
+
+        if (sender instanceof Player player)
+            player.sendMessage(MiniMessage.miniMessage().deserialize(config.getMessages().get("deleted").replaceAll("%gradient%", gradient.getName())));
     }
 
     @Execute(name = "delete", aliases = {"remove"})
     @Permission("pg.delete")
     public void onDelete(@Context CommandSender sender, @Arg Gradient gradient) {
+        if (sender instanceof Player player)
+            player.sendMessage(MiniMessage.miniMessage().deserialize(config.getMessages().get("deleted").replaceAll("%gradient%", gradient.getName())));
+
         gradientManager.deleteGradient(gradient);
     }
 
