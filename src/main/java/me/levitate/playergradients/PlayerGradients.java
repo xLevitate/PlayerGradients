@@ -1,6 +1,5 @@
 package me.levitate.playergradients;
 
-import dev.rollczi.litecommands.LiteCommands;
 import dev.rollczi.litecommands.bukkit.LiteCommandsBukkit;
 import fr.mrmicky.fastinv.FastInvManager;
 import me.levitate.playergradients.command.GradientCommand;

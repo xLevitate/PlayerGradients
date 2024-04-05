@@ -7,7 +7,6 @@ messages:
   no-name: "<#D91C1C>You must add '%name%' where the player name should go."
   already-exists: "<#D91C1C>A gradient with that name already exists."
 
-# Menu related configurations
 menu:
   menu-title: "        ᴘʟᴀʏᴇʀ ɢʀᴀᴅɪᴇɴᴛꜱ"
   menu-borders: true
