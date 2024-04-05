@@ -24,9 +24,7 @@ dependencies {
     compileOnly("org.projectlombok:lombok:1.18.28")
     annotationProcessor("org.projectlombok:lombok:1.18.28")
 
-    implementation("co.aikar:acf-paper:0.5.1-SNAPSHOT")
     implementation("dev.rollczi:litecommands-bukkit:3.2.0")
-
     implementation("fr.mrmicky:FastInv:3.0.4")
     implementation("dev.triumphteam:triumph-gui:3.1.2")
 }
