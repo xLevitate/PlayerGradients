@@ -91,7 +91,9 @@ public class GradientManager {
 
         this.equipGradient(playerUUID, gradient);
 
-        String placeholder = gradient.getPlaceholder().replaceAll("%name%", player.getName());
+        final String PAPIPlaceholder = PlaceholderAPI.setPlaceholders(player, gradient.getPlaceholder());
+        final String placeholder = PAPIPlaceholder.replaceAll("%name%", player.getName());
+
         player.sendMessage(MiniMessage.miniMessage().deserialize(config.getMessages().get("equip-change").replaceAll("%placeholder%", placeholder)));
     }
 
@@ -204,8 +206,10 @@ public class GradientManager {
         ItemStack gradientItem = new ItemStack(Material.NAME_TAG);
         ItemMeta itemMeta = gradientItem.getItemMeta();
 
-        String placeholder = gradient.getPlaceholder().replaceAll("%name%", player.getName());
-        String configName = config.itemName.replaceAll("%placeholder%", placeholder);
+        final String PAPIPlaceholder = PlaceholderAPI.setPlaceholders(player, gradient.getPlaceholder());
+        final String placeholder = PAPIPlaceholder.replaceAll("%name%", player.getName());
+
+        final String configName = config.itemName.replaceAll("%placeholder%", placeholder);
 
         Component name = MiniMessage.miniMessage().deserialize(configName)
                 .decoration(TextDecoration.ITALIC, false);
