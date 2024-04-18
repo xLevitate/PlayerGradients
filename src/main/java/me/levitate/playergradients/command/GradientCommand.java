@@ -47,13 +47,6 @@ public class GradientCommand {
     @Execute(name = "create")
     @Permission("pg.create")
     public void onCreate(@Context CommandSender sender, @Arg("name") String name, @Arg("placeholder") String placeholder) {
-        if (!placeholder.contains("%name%")) {
-            if (sender instanceof Player player)
-                config.sendMessage(player, "no-name");
-
-            return;
-        }
-
         if (gradientManager.getGradientByName(name) != null) {
             if (sender instanceof Player player)
                 config.sendMessage(player, "already-exists");

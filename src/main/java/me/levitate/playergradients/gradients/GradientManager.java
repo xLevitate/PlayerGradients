@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 
 import lombok.Getter;
 
+import me.clip.placeholderapi.PlaceholderAPI;
 import me.levitate.playergradients.config.Configuration;
 
 import net.kyori.adventure.text.Component;
@@ -172,9 +173,10 @@ public class GradientManager {
             return playerName;
         }
 
-        final String placeholder = gradient.getPlaceholder().replace("%name%", playerName);
-        final Component gradientComponent = MiniMessage.miniMessage().deserialize(placeholder);
+        final String placeholder = PlaceholderAPI.setPlaceholders(player, gradient.getPlaceholder());
+        final String placeholderName = placeholder.replace("%name%", player.getName());
 
+        final Component gradientComponent = MiniMessage.miniMessage().deserialize(placeholderName);
         return LegacyComponentSerializer.legacyAmpersand().serialize(gradientComponent);
     }
 

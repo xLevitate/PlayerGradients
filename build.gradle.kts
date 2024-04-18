@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "me.levitate"
-version = "1.0.6"
+version = "1.1.0"
 
 repositories {
     mavenCentral()
@@ -26,7 +26,7 @@ dependencies {
 
     implementation("dev.rollczi:litecommands-bukkit:3.2.0")
     implementation("fr.mrmicky:FastInv:3.0.4")
-    implementation("dev.triumphteam:triumph-gui:3.1.2")
+    implementation("dev.triumphteam:triumph-gui:3.1.7")
 }
 
 tasks.shadowJar {
